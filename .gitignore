@@ -1,0 +1,6 @@
+*.log
+*.idb
+*.pdb
+*tlog/
+*Debug/
+*.vs/
