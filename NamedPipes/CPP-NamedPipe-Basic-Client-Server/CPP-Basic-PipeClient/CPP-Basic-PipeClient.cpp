@@ -7,7 +7,7 @@ typedef enum _csIL {
 	IDENTIFICATION,
 	IMPERSONATION,
 	DELEGATION
-} CSIL;
+} CSIL;
 
 const int MESSAGE_SIZE = 512;
 
