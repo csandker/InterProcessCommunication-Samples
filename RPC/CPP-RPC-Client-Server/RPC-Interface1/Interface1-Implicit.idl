@@ -1,0 +1,22 @@
+[
+	// UUID: A unique identifier that distinguishes this
+	// interface from other interfaces.
+	uuid(9510b60a-2eac-43fc-8077-aaefbdf3752b),
+
+	// This is version 1.0 of this interface.
+	version(1.0),
+
+	
+	// Using an implicit handle here named hExample1Binding:
+	implicit_handle(handle_t hImplicitBinding)
+	
+]
+interface Example1 // The interface is named Example1
+{
+	// A function that takes a zero-terminated string.
+	int Output(
+		[in, string] const char* pszOutput);
+	//[out, string] const char* szReturn);
+
+	void Shutdown();
+}

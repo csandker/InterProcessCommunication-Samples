@@ -1,0 +1,25 @@
+[
+	// UUID: A unique identifier that distinguishes this
+	// interface from other interfaces.
+	uuid(d6b1ad2b-b550-4729-b6c2-1651f58480c3),
+
+	// This is version 1.0 of this interface.
+	version(1.0),
+
+	/*
+	 In this example we're using an explicit binding handle.
+	 Within an (optional) .acf file we could specify the keyword "explicit_handle".
+	 An Explicit handle is not specifed with an extra keyword in the IDL file, but
+	 by adding a handle parameter to all interface function. See "[in] handle_t hBinding" parameter below..
+	*/
+]
+interface Example1 // The interface is named Example1
+{
+	// A function that takes a zero-terminated string.
+	int Output(
+		[in] handle_t hBinding,
+		[in, string] const char* pszOutput);
+
+	void Shutdown(
+		[in] handle_t  hBinding);
+}
