@@ -11,14 +11,14 @@ typedef enum _csENDPOINTTYPE {
 int main()
 {
 	wprintf(L"[*] Starting RPC Client!\n");
-	RPC_STATUS status;
+	RPC_STATUS rpcStatus;
 	BOOL bSetBindingAuth = TRUE;
 	RPC_WSTR szStringBinding = NULL;
 	RPC_WSTR pszProtSeq;
 	RPC_WSTR pszTCPPort;
-	RPC_WSTR pszTCPHost = (RPC_WSTR)L"localhost";//(RPC_WSTR)L"Spaceland-SRV-1"; //L"WIN10-Client-2"; //reinterpret_cast<RPC_WSTR>(L"localhost");
-	RPC_WSTR pszHostSPN = (RPC_WSTR)L"Host/LONLEYPLANET-WI";//(RPC_WSTR)L"Host/SPACELAND-SRV-1"; //L"Host/WIN10-CLIENT-2";//
-	CSENDPOINTTYPE pwsEndpointType = LRPC;
+	RPC_WSTR pszTCPHost = (RPC_WSTR)L"GSrv1.SafeAlliance.local";//(RPC_WSTR)L"Spaceland-SRV-1"; //L"WIN10-Client-2"; //reinterpret_cast<RPC_WSTR>(L"localhost");
+	RPC_WSTR pszHostSPN = (RPC_WSTR)L"Host/GSRV1";//(RPC_WSTR)L"Host/SPACELAND-SRV-1"; //L"Host/WIN10-CLIENT-2";//
+	CSENDPOINTTYPE pwsEndpointType = NamedPipe;
 
 	switch (pwsEndpointType)
 	{
@@ -55,7 +55,7 @@ int main()
 	// Creates a string binding handle.
 	// Connection is not done here.
 	wprintf(L"[*] Create string binding to '%s:%s' using protocol '%s'.\n", pszTCPHost, pszTCPPort, pszProtSeq);
-	status = RpcStringBindingCompose(
+	rpcStatus = RpcStringBindingCompose(
 		NULL,           // UUID to bind to.
 		pszProtSeq,		// Use TCP/IP protocol.
 		pszTCPHost,		// TCP/IPww network address to use.
@@ -63,25 +63,25 @@ int main()
 		NULL,           // Protocol dependent network options to use.
 		&szStringBinding);	// String binding output.
 
-	if (status != RPC_S_OK) {
-		wprintf(L"[-] RpcStringBindingCompose() failed with status: %d.\n", status);
-		exit(status);
+	if (rpcStatus != RPC_S_OK) {
+		wprintf(L"[-] RpcStringBindingCompose() failed with status: %d.\n", rpcStatus);
+		exit(rpcStatus);
 	}
 
 	handle_t hExplicitBinding = NULL;
 	// Create a valid binding handle from String
-	status = RpcBindingFromStringBinding(
+	rpcStatus = RpcBindingFromStringBinding(
 		szStringBinding,	// The string binding to validate.
 		&hExplicitBinding	// Put the result in the implicit binding
 	);						// handle defined in the IDL file.
-	if (status != RPC_S_OK) {
-		wprintf(L"[-] RpcBindingFromStringBinding() failed with status: %d.\n", status);
-		exit(status);
+	if (rpcStatus != RPC_S_OK) {
+		wprintf(L"[-] RpcBindingFromStringBinding() failed with status: %d.\n", rpcStatus);
+		exit(rpcStatus);
 	}
 
 	if (bSetBindingAuth) {
 		wprintf(L"[*] Set Binding authentication info to SPN '%s' with an ImpersonationType of '%d'.\n", pszHostSPN, secQos.ImpersonationType);
-		status = RpcBindingSetAuthInfoEx(
+		rpcStatus = RpcBindingSetAuthInfoEx(
 			hExplicitBinding,		// the client's binding handle
 			pszHostSPN,				// the server's service principale name (SPN)
 			RPC_C_AUTHN_LEVEL_PKT,	// authentication level as defined at https://docs.microsoft.com/en-us/windows/win32/rpc/authentication-level-constants
@@ -91,9 +91,9 @@ int main()
 			&secQos					// Quality of Service structure
 		);
 
-		if (status != RPC_S_OK) {
-			wprintf(L"[-] RpcBindingSetAuthInfoEx() failed with status: %d.\n", status);
-			exit(status);
+		if (rpcStatus != RPC_S_OK) {
+			wprintf(L"[-] RpcBindingSetAuthInfoEx() failed with status: %d.\n", rpcStatus);
+			exit(rpcStatus);
 		}
 	}
 
@@ -104,8 +104,8 @@ int main()
 		int retValue = Output(hExplicitBinding, "Hello From Client!");
 		//ret = Output(hExplicitBinding, "Triggering Remote Shutdown now...");
 		wprintf(L"[+] Value returned from Server is: %d\n", retValue);
-		wprintf(L"[*] Trigger remote Shutdown now...\n");
-		Shutdown(hExplicitBinding);
+		//wprintf(L"[*] Trigger remote Shutdown now...\n");
+		//Shutdown(hExplicitBinding);
 	}
 	RpcExcept(1)
 	{
@@ -115,17 +115,17 @@ int main()
 
 	wprintf(L"[*] Shuting down client...\n");
 	// Free the memory allocated by a string.
-	status = RpcStringFree(&szStringBinding);
-	if (status != RPC_S_OK) {
-		wprintf(L"[-] RpcStringFree() failed with status: %d.\n", status);
-		exit(status);
+	rpcStatus = RpcStringFree(&szStringBinding);
+	if (rpcStatus != RPC_S_OK) {
+		wprintf(L"[-] RpcStringFree() failed with status: %d.\n", rpcStatus);
+		exit(rpcStatus);
 	}
 
 	// Releases binding handle resources and disconnects from the server.
-	status = RpcBindingFree(&hExplicitBinding);
-	if (status != RPC_S_OK) {
-		wprintf(L"[-] RpcBindingFree() failed with status: %d.\n", status);
-		exit(status);
+	rpcStatus = RpcBindingFree(&hExplicitBinding);
+	if (rpcStatus != RPC_S_OK) {
+		wprintf(L"[-] RpcBindingFree() failed with status: %d.\n", rpcStatus);
+		exit(rpcStatus);
 	}
 
 	// exit successfully

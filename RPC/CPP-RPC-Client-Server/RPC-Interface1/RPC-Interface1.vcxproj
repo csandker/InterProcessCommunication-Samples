@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="Example1.idl" />
     <Midl Include="Interface1-Explicit.idl" />
     <Midl Include="Interface1-Implicit.idl" />
   </ItemGroup>

@@ -39,15 +39,12 @@ void Shutdown(
 
 int main()
 {
-	handle_t hBinding = NULL;
-	BOOL bAuthBinding = FALSE;
 	wprintf(L"[*] RPC Server started.\n");
 
+	handle_t hBinding = NULL;
 	RPC_STATUS rpcStatus;
 	RPC_WSTR pszProtSeq = (RPC_WSTR)L"ncacn_ip_tcp"; //reinterpret_cast<RPC_WSTR>(L"ncacn_ip_tcp");
-	RPC_WSTR pszTCPPort = (RPC_WSTR)L"8989"; //reinterpret_cast<RPC_WSTR>(L"8989");
-	//RPC_WSTR pszProtSeq = (RPC_WSTR)L"ncacn_np"; //reinterpret_cast<RPC_WSTR>(L"ncacn_ip_tcp");
-	//RPC_WSTR pszTCPPort = (RPC_WSTR)L"\\pipe\\RPCServer1ESCA"; //reinterpret_cast<RPC_WSTR>(L"8989");
+	RPC_WSTR pszTCPPort = (RPC_WSTR)L"8989";
 
 	// Create Binding information
 	wprintf(L"[*] Create Binding Information using protocol '%s' at '%s'...", pszTCPPort, pszProtSeq, pszTCPPort);
@@ -67,7 +64,7 @@ int main()
 	wprintf(L"[*] Registering Server interface without registration Flags or SecurityCallback...");
 	rpcStatus = RpcServerRegisterIf2(
 		Example1_v1_0_s_ifspec,              // Interface to register.
-		NULL,                                // Use the MIDL generated entry-point vector.
+		NULL,                                // NULL GUID
 		NULL,                                // Use the MIDL generated entry-point vector.
 		0,									 // No flags.
 		RPC_C_LISTEN_MAX_CALLS_DEFAULT,      // Use default number of concurrent calls.
@@ -78,45 +75,6 @@ int main()
 		wprintf(L"Failed. Error: %s\n", rpcStatus);
 		exit(rpcStatus);
 	} else wprintf(L"Success.\n");
-
-	if (bAuthBinding) {
-		// Obtain SPN for host
-		DWORD cSPN;
-		TCHAR** ppFoundSPNs;
-		DWORD spnStatus;
-		RPC_WSTR pszSpn;
-		wprintf(L"[*] Getting host SPN...");
-		spnStatus = DsGetSpn(
-			DS_SPN_NB_HOST,	// SPN format ServiceClass/ InstanceName: InstancePort
-			L"Host",		// SPN class
-			NULL,			// DNS name of SPN, not required therefor NULL
-			0,				// SPN instance port, 0 to specfiy that SPN does not include port
-			0,				// number additional instance names
-			NULL,			// no additional instance names
-			NULL,			// no additional instance ports
-			&cSPN,			// pointer to DWORD containing the number of SPNs found
-			&ppFoundSPNs	// Pointer to a variable that receives a pointer to an array of SPNs
-		);
-		if (spnStatus != ERROR_SUCCESS) {
-			wprintf(L"Failed. Error: %s\n", rpcStatus);
-			exit(spnStatus);
-		}
-		else wprintf(L"Success.\n");
-		pszSpn = (RPC_WSTR)ppFoundSPNs;
-		// Register authentication info
-		wprintf(L"[*] Registering Auth info with SPN '%s'...", *ppFoundSPNs);
-		rpcStatus = RpcServerRegisterAuthInfo(
-			pszSpn,					// Server principal name
-			RPC_C_AUTHN_WINNT,		// using NTLM as authentication service provider as defined at https://docs.microsoft.com/en-us/windows/win32/rpc/authentication-service-constants
-			NULL,					// Use default key function, is ignored for NTLM SSP as per https://docs.microsoft.com/en-us/windows/win32/api/rpcdce/nf-rpcdce-rpcserverregisterauthinfo
-			NULL);					// No arg for key function
-
-		if (rpcStatus) {
-			wprintf(L"Failed. Error: %s\n", rpcStatus);
-			exit(rpcStatus);
-		}
-		else wprintf(L"Success.\n");
-	}
 	
 	// Start to listen for remote procedure
 	// calls for all registered interfaces.

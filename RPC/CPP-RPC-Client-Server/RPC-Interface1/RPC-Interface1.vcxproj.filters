@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="Example1.idl">
-      <Filter>Source Files</Filter>
-    </Midl>
     <Midl Include="Interface1-Implicit.idl">
       <Filter>Source Files</Filter>
     </Midl>

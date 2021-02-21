@@ -45,9 +45,9 @@ void Shutdown(
 
 int main()
 {
-	handle_t hBinding = NULL;
 	wprintf(L"[*] RPC Server started.\n");
 
+	handle_t hBinding = NULL;
 	RPC_STATUS rpcStatus;
 	RPC_WSTR pszProtSeq = (RPC_WSTR)L"ncacn_ip_tcp"; //reinterpret_cast<RPC_WSTR>(L"ncacn_ip_tcp");
 	RPC_WSTR pszTCPPort = (RPC_WSTR)L"8989"; //reinterpret_cast<RPC_WSTR>(L"8989");
@@ -70,9 +70,9 @@ int main()
 	wprintf(L"[*] Registering Server interface ...");
 	rpcStatus = RpcServerRegisterIf2(
 		Example1_v1_0_s_ifspec,              // Interface to register.
+		NULL,                                // NULL GUID
 		NULL,                                // Use the MIDL generated entry-point vector.
-		NULL,                                // Use the MIDL generated entry-point vector.
-		0, // Forces use of security callback.
+		0,									 // No Flags
 		RPC_C_LISTEN_MAX_CALLS_DEFAULT,      // Use default number of concurrent calls.
 		(unsigned)-1,                        // Infinite max size of incoming data blocks.
 		SecurityCallback);                   // Naive security callback.

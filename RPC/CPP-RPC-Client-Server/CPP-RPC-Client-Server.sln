@@ -3,16 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RPC-Server", "RPC-Server\RPC-Server.vcxproj", "{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{423C961C-29AD-432A-86C3-72DAAA407D9C} = {423C961C-29AD-432A-86C3-72DAAA407D9C}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RPC-Client", "RPC-Client\RPC-Client.vcxproj", "{2A2515C4-97EF-420E-B302-0A442332E7E2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{423C961C-29AD-432A-86C3-72DAAA407D9C} = {423C961C-29AD-432A-86C3-72DAAA407D9C}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RPC-Interface1", "RPC-Interface1\RPC-Interface1.vcxproj", "{423C961C-29AD-432A-86C3-72DAAA407D9C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RPC-Server1-Implicit-NoSecurity", "RPC-Server1-Implicit-NoSecurity\RPC-Server1-Implicit-NoSecurity.vcxproj", "{58A9F403-9EDA-4CD1-B6D3-6C737CCC1CEB}"
@@ -67,30 +57,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Debug|Win32.Build.0 = Debug|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Debug|x64.ActiveCfg = Debug|x64
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Debug|x64.Build.0 = Debug|x64
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Debug|x86.ActiveCfg = Debug|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Debug|x86.Build.0 = Debug|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Release|Win32.ActiveCfg = Release|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Release|Win32.Build.0 = Release|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Release|x64.ActiveCfg = Release|x64
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Release|x64.Build.0 = Release|x64
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Release|x86.ActiveCfg = Release|Win32
-		{C990E686-372D-4BC6-BADE-6B6E5C9A65FA}.Release|x86.Build.0 = Release|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Debug|Win32.Build.0 = Debug|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Debug|x64.ActiveCfg = Debug|x64
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Debug|x64.Build.0 = Debug|x64
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Debug|x86.ActiveCfg = Debug|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Debug|x86.Build.0 = Debug|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Release|Win32.ActiveCfg = Release|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Release|Win32.Build.0 = Release|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Release|x64.ActiveCfg = Release|x64
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Release|x64.Build.0 = Release|x64
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Release|x86.ActiveCfg = Release|Win32
-		{2A2515C4-97EF-420E-B302-0A442332E7E2}.Release|x86.Build.0 = Release|Win32
 		{423C961C-29AD-432A-86C3-72DAAA407D9C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{423C961C-29AD-432A-86C3-72DAAA407D9C}.Debug|Win32.Build.0 = Debug|Win32
 		{423C961C-29AD-432A-86C3-72DAAA407D9C}.Debug|x64.ActiveCfg = Debug|x64

@@ -142,8 +142,7 @@
     <ClInclude Include="RPC-Util.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Access.cpp" />
-    <ClCompile Include="Token.cpp" />
+    <ClCompile Include="Command.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
