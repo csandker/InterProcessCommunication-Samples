@@ -7,7 +7,7 @@ A few things to note here:<br>
 It makes sense to have the Interface Definition in a seperate “Projekt” cause the MIDL generates headers for both client and server
 
 You can avoid adding an extra ACF file if its just the Binding Handle Type you want to set, if you want some more features, e.g. [asynchronous communication](https://docs.microsoft.com/en-us/windows/win32/rpc/asynchronous-rpc) you will need an ACF file.<br>
-I've the set binding handle type within the IDL file, which requires the following setting switch:
+I've the set binding handle type within the IDL file, which requires the following setting switch:<br>
 **You need to specify the “/app_config” MIDL flag under "Configuration Properties" -> MIDL -> General -> Set "Application Configuration Mode" to “Yes (/app_config)”**
 
 As your RPC Client/Server will call some RPC specific API function you need to let your Linker know where to find these function. If you don't include rpctXX you will get errors LNK2019 Linker errors like “error LNK2019: unresolved external symbol __imp_RpcBindingFree ”. To add the RPC library go to:<br>
