@@ -9,10 +9,13 @@ typedef enum _csIL {
 	DELEGATION
 } CSIL;
 
+
 const int MESSAGE_SIZE = 512;
 
 int main()
 {
+	LPCWSTR pwsPipePrefix = L"\\\\.\\pipe\\";
+	LPCWSTR pwsPipeName = NULL;
 	HANDLE hFile = NULL;
 	BOOL bPipeRead = TRUE;
 	LPWSTR pReadBuf[MESSAGE_SIZE] = { 0 };
@@ -51,11 +54,12 @@ int main()
 		wprintf(L"[-] More than 200 chars (%d).. exiting.\n", iInputLen);
 		return 1;
 	}
-
+	std::wstring wsConcatPipeName = pwsPipePrefix + (std::wstring)wcInputPipeName;
+	pwsPipeName = wsConcatPipeName.c_str();
 	// Connect to pipe server
-	wprintf(L"[*] Connecting to %s ...", wcInputPipeName);
+	wprintf(L"[*] Connecting to %s ...", pwsPipeName);
 	//hFile = CreateFile(pipeName, GENERIC_READ , 0, NULL, OPEN_EXISTING, 0, NULL);
-	hFile = CreateFile(wcInputPipeName, GENERIC_READ, 0, NULL, OPEN_EXISTING, dwFlags, NULL);
+	hFile = CreateFile(pwsPipeName, GENERIC_READ, 0, NULL, OPEN_EXISTING, dwFlags, NULL);
 	if (hFile != INVALID_HANDLE_VALUE) wprintf(L"Success.\n");
 	else wprintf(L"Error: %d.", GetLastError());
 
