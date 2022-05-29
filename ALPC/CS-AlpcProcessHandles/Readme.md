@@ -4,7 +4,7 @@
 
 Background and details for this code can be found in this blog post:
 
-[Offensive Windows IPC Internals 3: ALPC](http://localhost:4000/2022/05/24/Offensive-Windows-IPC-3-ALPC.html)
+[Offensive Windows IPC Internals 3: ALPC](https://csandker.io/2022/05/24/Offensive-Windows-IPC-3-ALPC.html)
 
 An exmaple output is shown below:
 
